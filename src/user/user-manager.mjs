@@ -8,11 +8,18 @@ export default class UserManager {
         this.web3 = new Web3(new Web3.providers.HttpProvider(host));
     }
     add(context) {
-        this.web3.eth.getBlock(111, function (error, result) {
-            if (!error)
-                context.res.json({ "result": result })
-            else
-                console.error(error);
-        });
+        const password = context.req.body.password;
+        const confirmPass = context.req.body.confirm;
+        if (password != confirmPass) {
+            context.res.status(403).json("Password dismatched");
+            return;
+        }
+
+        this.web3.eth.personal.newAccount(password)
+            .then(body =>
+                context.res.status(200).json({
+                    address: body
+                })
+            );
     }
 }

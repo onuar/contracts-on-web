@@ -20,7 +20,7 @@ app.get("/hi", (req, res) =>
     res.json({ message: 'hello world!' })
 );
 
-app.get("/user/add", (req, res) => {
+app.post("/user/add", (req, res) => {
     user.add({ req, res });
 });
 
