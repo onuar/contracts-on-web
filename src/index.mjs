@@ -1,6 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
+
 import UserManager from './user/user-manager';
+import Deployer from './contract/deployer';
 
 const app = express();
 
@@ -15,6 +17,7 @@ app.use(function (req, res, next) {
 });
 
 const user = new UserManager();
+const deployer = new Deployer();
 
 app.get("/hi", (req, res) =>
     res.json({ message: 'hello world!' })
@@ -22,6 +25,10 @@ app.get("/hi", (req, res) =>
 
 app.post("/user/add", (req, res) => {
     user.add({ req, res });
+});
+
+app.post("/contract/deploy", (req, res) => {
+    deployer.deploy({ req, res });
 });
 
 const server = app.listen(process.env.PORT || 8088, () => {

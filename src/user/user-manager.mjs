@@ -11,7 +11,7 @@ export default class UserManager {
         const password = context.req.body.password;
         const confirmPass = context.req.body.confirm;
         if (password != confirmPass) {
-            context.res.status(403).json("Password dismatched");
+            context.res.status(403).json("Password mismatched");
             return;
         }
 
