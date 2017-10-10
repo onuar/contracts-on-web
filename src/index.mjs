@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import UserManager from './user/user-manager';
 
 const app = express();
 
@@ -13,9 +14,15 @@ app.use(function (req, res, next) {
     next();
 });
 
+const user = new UserManager();
+
 app.get("/hi", (req, res) =>
     res.json({ message: 'hello world!' })
 );
+
+app.get("/user/add", (req, res) => {
+    user.add({ req, res });
+});
 
 const server = app.listen(process.env.PORT || 8088, () => {
     console.log(`Listening on port ${server.address().port}.`);

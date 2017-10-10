@@ -25,8 +25,15 @@
   },
   "homepage": "https://github.com/onuar/contracts-on-web#readme",
   "dependencies": {
-    "@std/esm": "^0.11.3",
     "body-parser": "^1.18.2",
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "konfig": "^0.2.1",
+    "web3": "^1.0.0-beta.23"
+  },
+  "devDependencies": {
+    "@std/esm": "^0.11.3",
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "sinon": "^4.0.1"
   }
 }
