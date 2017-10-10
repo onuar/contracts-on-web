@@ -1,0 +1,32 @@
+{
+  "name": "contracts-on-web",
+  "version": "1.0.0",
+  "description": "smart-contract-as-a-service",
+  "main": "index.js",
+  "scripts": {
+    "start": "node -r @std/esm ./src/index.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onuar/contracts-on-web.git"
+  },
+  "keywords": [
+    "smart contracts",
+    "web",
+    "api",
+    "service",
+    "ethereum"
+  ],
+  "author": "Onur Aykac",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/onuar/contracts-on-web/issues"
+  },
+  "homepage": "https://github.com/onuar/contracts-on-web#readme",
+  "dependencies": {
+    "@std/esm": "^0.11.3",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2"
+  }
+}
