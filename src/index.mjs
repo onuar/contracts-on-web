@@ -27,8 +27,8 @@ app.post("/user/add", (req, res) => {
     user.add({ req, res });
 });
 
-app.post("/contract/deploy", (req, res) => {
-    deployer.deploy({ req, res });
+app.post("/contract/prepare", (req, res) => {
+    deployer.prepare({ req, res });
 });
 
 const server = app.listen(process.env.PORT || 8088, () => {
