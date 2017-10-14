@@ -1,3 +1,4 @@
+import ContractClient from '../contract/contract-client';
 import Web3 from 'web3';
 
 const prepareResources = (abi) => {
@@ -36,12 +37,53 @@ export default class Deployer {
     }
 
     prepare(context) {
-        const artifact = context.req.body.artifact;
+        let artifact = context.req.body.artifact;
+        let version = context.req.headers["api-version"];
+
         if (!artifact) {
             context.res.status(403).json({ message: "Artifact is required." });
+        }
+        if (!version) {
+            context.res.status(403).json({ message: "You must add a version on headers." });
         }
 
         var resources = prepareResources(artifact.abi);
         context.res.status(200).json({ "resources": resources });
+    }
+
+    deploy(context) {
+        let options = context.req.body.options;
+        let contractOptions = context.req.body.contractOptions;
+        let artifact = context.req.body.artifact;
+
+        let account = context.req.headers["from-account"];
+        let password = context.req.headers["password"];
+
+        if (!options) {
+            context.res.status(403).json({ message: "Options is required." });
+        }
+        if (!contractOptions) {
+            context.res.status(403).json({ message: "Contract options in body" });
+        }
+
+
+        let gas = contractOptions.gas;
+        let gasPrice = contractOptions.gasPrice;
+        let args = contractOptions.args;
+
+        let client = new ContractClient({ account, password });
+
+        client
+            .deployContract({
+                artifact: artifact,
+                gas: gas,
+                gasPrice: gasPrice,
+                args: args
+            })
+            .then(newContractInstance => {
+                console.log(`Done!!! Address: ${newContractInstance.options.address}`);
+                context.res.status(200).json({ address: newContractInstance.options.address });
+            });
+
     }
 }

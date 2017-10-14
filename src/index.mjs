@@ -31,6 +31,10 @@ app.post("/contract/prepare", (req, res) => {
     deployer.prepare({ req, res });
 });
 
+app.post("/contract/deploy", (req, res) => {
+    deployer.deploy({ req, res });
+});
+
 const server = app.listen(process.env.PORT || 8088, () => {
     console.log(`Listening on port ${server.address().port}.`);
 });
