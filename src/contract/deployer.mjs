@@ -81,7 +81,7 @@ export default class Deployer {
                 args: args
             })
             .then(newContractInstance => {
-                console.log(`Done!!! Address: ${newContractInstance.options.address}`);
+                console.log(`Address: ${newContractInstance.options.address}`);
                 context.res.status(200).json({ address: newContractInstance.options.address });
             });
 

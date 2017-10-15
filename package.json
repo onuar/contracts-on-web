@@ -27,7 +27,7 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "graphql-request": "^1.4.0",
+    "graphql-client": "^2.0.0",
     "konfig": "^0.2.1",
     "web3": "^1.0.0-beta.23"
   },
