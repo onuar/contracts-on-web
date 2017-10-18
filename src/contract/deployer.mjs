@@ -22,33 +22,36 @@ const prepareResources = (abi) => {
             resource = `${resource} ${inputs}`;
         }
 
-        result.push(
-            {
-                id: i,
-                api: resource
-            }
-        );
+        result.push({
+            id: i,
+            api: resource
+        });
     }
     return result;
 };
 
 export default class Deployer {
-    constructor() {
-    }
+    constructor() {}
 
     prepare(context) {
         let artifact = context.req.body.artifact;
         let version = context.req.headers["api-version"];
 
         if (!artifact) {
-            context.res.status(403).json({ message: "Artifact is required." });
+            context.res.status(403).json({
+                message: "Artifact is required."
+            });
         }
         if (!version) {
-            context.res.status(403).json({ message: "You must add a version on headers." });
+            context.res.status(403).json({
+                message: "You must add a version on headers."
+            });
         }
 
         var resources = prepareResources(artifact.abi);
-        context.res.status(200).json({ "resources": resources });
+        context.res.status(200).json({
+            "resources": resources
+        });
     }
 
     deploy(context) {
@@ -60,10 +63,14 @@ export default class Deployer {
         let password = context.req.headers["password"];
 
         if (!options) {
-            context.res.status(403).json({ message: "Options is required." });
+            context.res.status(403).json({
+                message: "Options is required."
+            });
         }
         if (!contractOptions) {
-            context.res.status(403).json({ message: "Contract options in body" });
+            context.res.status(403).json({
+                message: "Contract options in body"
+            });
         }
 
 
@@ -71,7 +78,10 @@ export default class Deployer {
         let gasPrice = contractOptions.gasPrice;
         let args = contractOptions.args;
 
-        let client = new ContractClient({ account, password });
+        let client = new ContractClient({
+            account,
+            password
+        });
 
         client
             .deployContract({
@@ -81,8 +91,10 @@ export default class Deployer {
                 args: args
             })
             .then(newContractInstance => {
-                console.log(`Address: ${newContractInstance.options.address}`);
-                context.res.status(200).json({ address: newContractInstance.options.address });
+                console.debug(`Address: ${newContractInstance.options.address}`);
+                context.res.status(200).json({
+                    address: newContractInstance.options.address
+                });
             });
 
     }

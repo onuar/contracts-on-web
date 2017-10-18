@@ -39,30 +39,30 @@ export default class ContractClient {
                     gasPrice: gasPrice
                 })
                 .on("error", function (error) {
-                    console.debug(`Error: ${JSON.stringify(error)}`);
+                    console.log(`Error: ${JSON.stringify(error)}`);
                     throw error;
                 })
                 .on("transactionHash", function (transactionHash) {
-                    console.debug(`transactionHash: ${JSON.stringify(transactionHash)}`);
+                    console.log(`transactionHash: ${JSON.stringify(transactionHash)}`);
                 })
                 .on("receipt", function (receipt) {
-                    console.debug(
+                    console.log(
                         `Receipt: address: ${receipt.contractAddress}. json: ${receipt}`
                     );
                 })
                 .on("confirmation", function (confirmationNumber, receipt) {
-                    console.debug(
+                    console.log(
                         `confirmation: ${JSON.stringify(
                             confirmationNumber
                         )}, Receipt: ${receipt}`
                     );
                 })
                 .then(function (newContractInstance) {
-                    console.debug("done!");
-                    console.debug(
+                    console.log("done!");
+                    console.log(
                         `Contract Address: '${newContractInstance.options.address}'`
                     );
-                    console.debug(
+                    console.log(
                         `Contract Instance: '${JSON.stringify(newContractInstance)}'`
                     );
                     return newContractInstance;
